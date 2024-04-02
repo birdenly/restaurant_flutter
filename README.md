@@ -1,2 +1,2 @@
-# restaurant_flutter
-restaurant using flutter for PROJETO DA UNIDADE I
+# restaurant flutter
+App de restaurante usando flutter feito para o projeto da unidade 1 de Desenvolvimento mobile
