@@ -1,7 +1,5 @@
 import 'dart:math';
 
-import 'package:f02_todo_list/components/drawer.dart';
-import 'package:f02_todo_list/components/pratosScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'components/lista_carrinho.dart';
@@ -28,17 +26,30 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _currentIndex = 0;
   List<Widget> body = const [
-    PratosScreen(),
+    Icon(Icons.home),
     Icon(Icons.add),
     Icon(Icons.list),
     Icon(Icons.restaurant_menu),
   ];
-
+  //sobre
+  //creditos
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(title: Text('Restaurante do Zé')),
-        endDrawer: DrawerWidget(),
+        endDrawer: Drawer(
+          child: ListView(
+            padding: EdgeInsets.zero,
+            children: <Widget>[
+              ListTile(
+                title: Text('Sobre'),
+              ),
+              ListTile(
+                title: Text('Creditos'),
+              )
+            ],
+          ),
+        ),
         body: body[_currentIndex],
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: _currentIndex,

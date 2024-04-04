@@ -1,1 +1,0 @@
- C:\\Users\\lucas\\OneDrive\\Documentos\\ESTUDOS\\FACULDADE\\5_SEMESTRE\\MOBILE\\restaurant_flutter\\.dart_tool\\flutter_build\\ba5474e69c9ffa953961c11401cf3dfc\\native_assets.yaml: 
