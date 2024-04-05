@@ -1,7 +1,11 @@
 import 'dart:math';
 
+import 'package:f02_todo_list/components/bebidasScreen.dart';
 import 'package:f02_todo_list/components/drawer.dart';
+import 'package:f02_todo_list/components/pagemento.dart';
 import 'package:f02_todo_list/components/pratosScreen.dart';
+import 'package:f02_todo_list/components/sobremesaScreen.dart';
+import 'package:f02_todo_list/model/comida.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'components/lista_carrinho.dart';
@@ -27,15 +31,23 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _currentIndex = 0;
-  List<Widget> body = const [
-    PratosScreen(),
-    Icon(Icons.add),
-    Icon(Icons.list),
-    Icon(Icons.restaurant_menu),
-  ];
+  List<Comidas> _carrinho = [];
 
   @override
   Widget build(BuildContext context) {
+    List<Widget> body = [
+      PratosScreen(
+        compras: _carrinho,
+      ),
+      sobremesaScreen(
+        compras: _carrinho,
+      ),
+      bebidasScreen(
+        compras: _carrinho,
+      ),
+      ListaCarinhoScreen(compras: _carrinho),
+    ];
+
     return Scaffold(
         appBar: AppBar(title: Text('Restaurante do Zé')),
         endDrawer: DrawerWidget(),

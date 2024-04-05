@@ -1,6 +1,8 @@
 import 'dart:ffi';
 
-class Pratos {
+import 'package:f02_todo_list/model/comida.dart';
+
+class Pratos extends Comidas {
   String nome;
   double preco;
   String qtd;
@@ -15,7 +17,7 @@ class Pratos {
     required this.popular,
     required this.ingredientes,
     required this.imagem,
-  });
+  }) : super(nome: nome, imagem: imagem, preco: preco);
 }
 
 var listaDePratos = [
