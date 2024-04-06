@@ -44,12 +44,36 @@ class _bebidasScreenState extends State<bebidasScreen> {
                   'Preço: R\$ ${listaDeBebidas[index].preco.toStringAsFixed(2)}',
                   style: TextStyle(fontSize: 18.0),
                 ),
-                trailing: Checkbox(
-                  value: widget.compras.contains(listaDeBebidas[index]),
-                  onChanged: (bool? value) {
-                    setState(() {
-                      widget.compras.add(listaDeBebidas[index]);
-                    });
+                trailing: IconButton(
+                  icon: Icon(Icons.add),
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Text('Confirmação'),
+                          content: Text(
+                              'Você deseja adicionar ${listaDeBebidas[index].nome} à lista de compras?'),
+                          actions: <Widget>[
+                            TextButton(
+                              child: Text('Cancelar'),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                            TextButton(
+                              child: Text('Confirmar'),
+                              onPressed: () {
+                                setState(() {
+                                  widget.compras.add(listaDeBebidas[index]);
+                                });
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                          ],
+                        );
+                      },
+                    );
                   },
                 ),
                 onTap: () {

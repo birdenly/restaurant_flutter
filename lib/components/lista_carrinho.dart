@@ -1,4 +1,4 @@
-import 'package:f02_todo_list/components/pagemento.dart';
+import 'package:f02_todo_list/components/pagamento.dart';
 import 'package:f02_todo_list/model/comida.dart';
 import 'package:f02_todo_list/model/sobremesa.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +15,13 @@ class ListaCarinhoScreen extends StatefulWidget {
 
 class _ListaCarinhoScreenState extends State<ListaCarinhoScreen> {
   var retorno;
+
+  limpaCarrinho() {
+    setState(() {
+      widget.compras.clear();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     double totalValue = 0;
@@ -107,17 +114,18 @@ class _ListaCarinhoScreenState extends State<ListaCarinhoScreen> {
                     children: [
                       Flexible(
                         child: Text(
-                          'Total: R\$ $totalValue',
+                          'Total: R\$ ${totalValue.toStringAsFixed(2)}',
                           style: TextStyle(fontSize: 20),
                         ),
                       ),
                       ElevatedButton(
                         onPressed: () {
-                          // Navigate to the payment page
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => PagamentoScreen(),
+                              builder: (context) => PagamentoScreen(
+                                  carrinho: widget.compras,
+                                  limpaCarrinho: limpaCarrinho),
                             ),
                           );
                         },

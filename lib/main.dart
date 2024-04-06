@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:f02_todo_list/components/bebidasScreen.dart';
 import 'package:f02_todo_list/components/drawer.dart';
-import 'package:f02_todo_list/components/pagemento.dart';
+import 'package:f02_todo_list/components/pagamento.dart';
 import 'package:f02_todo_list/components/pratosScreen.dart';
 import 'package:f02_todo_list/components/sobremesaScreen.dart';
 import 'package:f02_todo_list/model/comida.dart';
@@ -49,7 +49,11 @@ class _MyHomePageState extends State<MyHomePage> {
     ];
 
     return Scaffold(
-        appBar: AppBar(title: Text('Restaurante do Zé')),
+        appBar: AppBar(
+          title: Text('Restaurante do Zé'),
+          backgroundColor: Colors.red,
+          foregroundColor: Colors.white,
+        ),
         endDrawer: DrawerWidget(),
         body: body[_currentIndex],
         bottomNavigationBar: BottomNavigationBar(
@@ -58,22 +62,22 @@ class _MyHomePageState extends State<MyHomePage> {
             BottomNavigationBarItem(
               icon: Icon(Icons.restaurant_menu),
               label: 'Pratos',
-              backgroundColor: Colors.blue,
+              backgroundColor: Colors.red,
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.cake),
               label: 'Sobremesa',
-              backgroundColor: Colors.green,
+              backgroundColor: Colors.red,
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.local_cafe),
               label: 'Bebidas',
-              backgroundColor: Colors.yellow,
+              backgroundColor: Colors.red,
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.shopping_cart),
               label: 'Carrinho',
-              backgroundColor: Colors.purple,
+              backgroundColor: Colors.red,
             ),
           ],
           onTap: (index) {

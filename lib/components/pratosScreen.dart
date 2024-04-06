@@ -42,12 +42,36 @@ class _PratosScreenState extends State<PratosScreen> {
                   'Preço: R\$ ${listaDePratos[index].preco.toStringAsFixed(2)}',
                   style: TextStyle(fontSize: 18.0),
                 ),
-                trailing: Checkbox(
-                  value: widget.compras.contains(listaDePratos[index]),
-                  onChanged: (bool? value) {
-                    setState(() {
-                      widget.compras.add(listaDePratos[index]);
-                    });
+                trailing: IconButton(
+                  icon: Icon(Icons.add),
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Text('Confirmação'),
+                          content: Text(
+                              'Você deseja adicionar ${listaDePratos[index].nome} à lista de compras?'),
+                          actions: <Widget>[
+                            TextButton(
+                              child: Text('Cancelar'),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                            TextButton(
+                              child: Text('Confirmar'),
+                              onPressed: () {
+                                setState(() {
+                                  widget.compras.add(listaDePratos[index]);
+                                });
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                          ],
+                        );
+                      },
+                    );
                   },
                 ),
                 onTap: () {
