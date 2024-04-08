@@ -23,7 +23,7 @@ class _SobremesaScreenState extends State<sobremesaScreen> {
         body: Column(
           children: [
             Row(
-              children: [Icon(Icons.star), Text(': sobremesas Populares')],
+              children: [Icon(Icons.star), Text(': Sobremesas Populares')],
             ),
             Expanded(
               child: ListView.builder(
