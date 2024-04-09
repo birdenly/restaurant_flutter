@@ -2,16 +2,11 @@ import 'package:f02_todo_list/model/comida.dart';
 import 'package:flutter/material.dart';
 import '../model/pratos.dart';
 
-class PratosScreen extends StatefulWidget {
+class PratosScreen extends StatelessWidget {
   List<Comidas> compras;
 
   PratosScreen({required this.compras});
 
-  @override
-  _PratosScreenState createState() => _PratosScreenState();
-}
-
-class _PratosScreenState extends State<PratosScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -75,10 +70,7 @@ class _PratosScreenState extends State<PratosScreen> {
                                     TextButton(
                                       child: Text('Confirmar'),
                                       onPressed: () {
-                                        setState(() {
-                                          widget.compras
-                                              .add(listaDePratos[index]);
-                                        });
+                                        compras.add(listaDePratos[index]);
                                         Navigator.of(context).pop();
                                       },
                                     ),

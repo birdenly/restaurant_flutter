@@ -4,16 +4,11 @@ import 'package:f02_todo_list/model/sobremesa.dart';
 import 'package:flutter/material.dart';
 import '../model/pratos.dart';
 
-class bebidasScreen extends StatefulWidget {
-  List<Comidas> compras;
+class bebidasScreen extends StatelessWidget {
+  final List<Comidas> compras;
 
-  bebidasScreen({required this.compras});
+  const bebidasScreen({required this.compras});
 
-  @override
-  _bebidasScreenState createState() => _bebidasScreenState();
-}
-
-class _bebidasScreenState extends State<bebidasScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -77,10 +72,7 @@ class _bebidasScreenState extends State<bebidasScreen> {
                                     TextButton(
                                       child: Text('Confirmar'),
                                       onPressed: () {
-                                        setState(() {
-                                          widget.compras
-                                              .add(listaDeBebidas[index]);
-                                        });
+                                        compras.add(listaDeBebidas[index]);
                                         Navigator.of(context).pop();
                                       },
                                     ),
