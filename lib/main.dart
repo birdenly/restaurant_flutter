@@ -1,26 +1,66 @@
 import 'dart:math';
 
-import 'package:f02_todo_list/components/bebidasScreen.dart';
-import 'package:f02_todo_list/components/drawer.dart';
-import 'package:f02_todo_list/components/pagamento.dart';
-import 'package:f02_todo_list/components/pratosScreen.dart';
-import 'package:f02_todo_list/components/sobremesaScreen.dart';
-import 'package:f02_todo_list/model/comida.dart';
+import 'package:restaurante_app/screens/bebidasScreen.dart';
+import 'package:restaurante_app/components/drawer.dart';
+import 'package:restaurante_app/screens/pagamento.dart';
+import 'package:restaurante_app/screens/pratosScreen.dart';
+import 'package:restaurante_app/screens/sobremesaScreen.dart';
+import 'package:restaurante_app/model/comida.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'components/lista_carrinho.dart';
 import 'model/pratos.dart';
+import 'model/bebidas.dart';
+import 'model/sobremesa.dart';
+import 'model/user.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(ToDoListApp());
+  runApp(restauranteApp());
 }
 
-class ToDoListApp extends StatelessWidget {
+class restauranteApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: MyHomePage(),
-    );
+    return MultiProvider(
+        providers: [
+          ChangeNotifierProvider(
+            create: (context) => Pratos(
+              nome: '',
+              preco: 0.0,
+              qtd: '',
+              popular: false,
+              ingredientes: "",
+              imagem: '',
+            ),
+          ),
+          ChangeNotifierProvider(
+            create: (context) => Sobremesa(
+                nome: '',
+                preco: 0.0,
+                calorias: '',
+                popular: false,
+                ingredientes: '',
+                imagem: ''),
+          ),
+          ChangeNotifierProvider(
+            create: (context) => Bebidas(
+                nome: '', preco: 0.0, popular: false, imagem: '', temp: ''),
+          ),
+          ChangeNotifierProvider(
+            create: (context) => User(name: ''),
+          ),
+          ChangeNotifierProvider(
+            create: (context) => Comidas(
+              nome: '',
+              imagem: '',
+              preco: 0.0,
+            ),
+          ),
+        ],
+        child: MaterialApp(
+          home: MyHomePage(),
+        ));
   }
 }
 
@@ -31,21 +71,14 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _currentIndex = 0;
-  List<Comidas> _carrinho = [];
 
   @override
   Widget build(BuildContext context) {
     List<Widget> body = [
-      PratosScreen(
-        compras: _carrinho,
-      ),
-      sobremesaScreen(
-        compras: _carrinho,
-      ),
-      bebidasScreen(
-        compras: _carrinho,
-      ),
-      ListaCarinhoScreen(compras: _carrinho),
+      PratosScreen(),
+      sobremesaScreen(),
+      bebidasScreen(),
+      ListaCarinhoScreen()
     ];
 
     return Scaffold(

@@ -1,6 +1,6 @@
 import 'dart:ffi';
 
-import 'package:f02_todo_list/model/comida.dart';
+import 'package:restaurante_app/model/comida.dart';
 
 class Sobremesa extends Comidas {
   String nome;
@@ -18,6 +18,10 @@ class Sobremesa extends Comidas {
     required this.ingredientes,
     required this.imagem,
   }) : super(nome: nome, imagem: imagem, preco: preco);
+
+  List<Sobremesa> get getList {
+    return listaDeSobremesas;
+  }
 }
 
 var listaDeSobremesas = [

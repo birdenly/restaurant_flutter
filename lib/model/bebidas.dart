@@ -1,6 +1,6 @@
 import 'dart:ffi';
 
-import 'package:f02_todo_list/model/comida.dart';
+import 'package:restaurante_app/model/comida.dart';
 
 class Bebidas extends Comidas {
   String nome;
@@ -16,6 +16,10 @@ class Bebidas extends Comidas {
     required this.popular,
     required this.imagem,
   }) : super(nome: nome, imagem: imagem, preco: preco);
+
+  List<Bebidas> get getList {
+    return listaDeBebidas;
+  }
 }
 
 var listaDeBebidas = [
