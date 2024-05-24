@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:restaurante_app/model/user.dart';
+import 'package:restaurante_app/screens/loginScreen.dart';
 
 class DrawerWidget extends StatelessWidget {
   Widget funcaoSobre() {
@@ -84,6 +87,20 @@ class DrawerWidget extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => funcaoCreditos()),
+              );
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.credit_card, color: Colors.redAccent),
+            title: Text(
+                'Log Out "${Provider.of<User>(context).userAtual.email}"',
+                style: TextStyle(color: Colors.black87)),
+            onTap: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => LoginPage(),
+                ),
               );
             },
           ),

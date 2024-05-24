@@ -70,11 +70,31 @@ class bebidasScreen extends StatelessWidget {
                                     TextButton(
                                       child: Text('Confirmar'),
                                       onPressed: () {
-                                        Provider.of<User>(context,
-                                                listen: false)
-                                            .carrinho
-                                            .add(listaDeBebidas[index]);
-                                        Navigator.of(ctx).pop();
+                                        if (Provider.of<User>(context,
+                                                    listen: false)
+                                                .userAtual
+                                                .carrinho
+                                                .contains(
+                                                    listaDeBebidas[index]) ==
+                                            false) {
+                                          Provider.of<User>(context,
+                                                  listen: false)
+                                              .userAtual
+                                              .carrinho
+                                              .add(listaDeBebidas[index]);
+                                          Navigator.of(ctx).pop();
+                                        } else {
+                                          for (var i in Provider.of<User>(
+                                                  context,
+                                                  listen: false)
+                                              .userAtual
+                                              .carrinho) {
+                                            if (i == listaDeBebidas[index]) {
+                                              i.counter++;
+                                              Navigator.of(ctx).pop();
+                                            }
+                                          }
+                                        }
                                       },
                                     ),
                                   ],

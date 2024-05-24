@@ -26,11 +26,12 @@ class _ListaCarinhoScreenState extends State<ListaCarinhoScreen> {
     // }
 
     double totalValue = 0;
-    for (var compra in Provider.of<User>(context, listen: false).carrinho) {
+    for (var compra
+        in Provider.of<User>(context, listen: false).userAtual.carrinho) {
       totalValue += (compra.preco * compra.counter);
     }
 
-    Provider.of<User>(context).carrinho.length == 0
+    Provider.of<User>(context).userAtual.carrinho.length == 0
         ? retorno = Center(
             child: Text("Nada no carrinho de compras!",
                 style: TextStyle(fontSize: 20)),
@@ -45,6 +46,7 @@ class _ListaCarinhoScreenState extends State<ListaCarinhoScreen> {
                 Flexible(
                   child: ListView.builder(
                     itemCount: Provider.of<User>(context, listen: false)
+                        .userAtual
                         .carrinho
                         .length,
                     itemBuilder: (context, index) {
@@ -57,6 +59,7 @@ class _ListaCarinhoScreenState extends State<ListaCarinhoScreen> {
                                 height: 80.0,
                                 child: Image.network(
                                   Provider.of<User>(context, listen: false)
+                                      .userAtual
                                       .carrinho[index]
                                       .imagem,
                                   fit: BoxFit.cover,
@@ -65,11 +68,14 @@ class _ListaCarinhoScreenState extends State<ListaCarinhoScreen> {
                               title: Text(
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
-                                Provider.of<User>(context).carrinho[index].nome,
+                                Provider.of<User>(context)
+                                    .userAtual
+                                    .carrinho[index]
+                                    .nome,
                                 style: TextStyle(fontSize: 18.0),
                               ),
                               subtitle: Text(
-                                'Preço: R\$ ${Provider.of<User>(context, listen: false).carrinho[index].preco.toStringAsFixed(2)}',
+                                'Preço: R\$ ${Provider.of<User>(context, listen: false).userAtual.carrinho[index].preco.toStringAsFixed(2)}',
                                 style: TextStyle(fontSize: 12.0),
                               ),
                               trailing: Row(
@@ -83,11 +89,13 @@ class _ListaCarinhoScreenState extends State<ListaCarinhoScreen> {
                                         setState(() {
                                           if (Provider.of<User>(context,
                                                       listen: false)
+                                                  .userAtual
                                                   .carrinho[index]
                                                   .counter >
                                               1) {
                                             Provider.of<User>(context,
                                                     listen: false)
+                                                .userAtual
                                                 .carrinho[index]
                                                 .counter--;
                                           }
@@ -98,6 +106,7 @@ class _ListaCarinhoScreenState extends State<ListaCarinhoScreen> {
                                   const SizedBox(width: 5.0),
                                   Text(
                                     Provider.of<User>(context)
+                                        .userAtual
                                         .carrinho[index]
                                         .counter
                                         .toString(),
@@ -113,6 +122,7 @@ class _ListaCarinhoScreenState extends State<ListaCarinhoScreen> {
                                         setState(() {
                                           Provider.of<User>(context,
                                                   listen: false)
+                                              .userAtual
                                               .carrinho[index]
                                               .counter++;
                                         });
@@ -145,6 +155,7 @@ class _ListaCarinhoScreenState extends State<ListaCarinhoScreen> {
                                                     setState(() {
                                                       Provider.of<User>(context,
                                                               listen: false)
+                                                          .userAtual
                                                           .carrinho
                                                           .removeAt(index);
                                                     });

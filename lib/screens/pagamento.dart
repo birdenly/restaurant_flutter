@@ -42,8 +42,8 @@ class _PagamentoScreenState extends State<PagamentoScreen> {
                       .carrinho
                       .map((item) => ListTile(
                             title: Text(item.nome),
-                            trailing:
-                                Text('R\$ ${item.preco.toStringAsFixed(2)}'),
+                            trailing: Text(
+                                'R\$ ${item.preco.toStringAsFixed(2)} x ${item.counter}'),
                           ))
                       .toList(),
                 ],
@@ -149,6 +149,7 @@ class _PagamentoScreenState extends State<PagamentoScreen> {
                             child: Text('OK'),
                             onPressed: () {
                               Provider.of<User>(context, listen: false)
+                                  .userAtual
                                   .clearCarrinho();
                               Navigator.of(ctx)
                                   .popUntil((route) => route.isFirst);

@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:restaurante_app/screens/bebidasScreen.dart';
 import 'package:restaurante_app/components/drawer.dart';
+import 'package:restaurante_app/screens/loginScreen.dart';
 import 'package:restaurante_app/screens/pagamento.dart';
 import 'package:restaurante_app/screens/pratosScreen.dart';
 import 'package:restaurante_app/screens/sobremesaScreen.dart';
@@ -48,7 +49,7 @@ class restauranteApp extends StatelessWidget {
                 nome: '', preco: 0.0, popular: false, imagem: '', temp: ''),
           ),
           ChangeNotifierProvider(
-            create: (context) => User(name: ''),
+            create: (context) => User(email: '', password: '', carrinho: []),
           ),
           ChangeNotifierProvider(
             create: (context) => Comidas(
@@ -59,7 +60,7 @@ class restauranteApp extends StatelessWidget {
           ),
         ],
         child: MaterialApp(
-          home: MyHomePage(),
+          home: LoginPage(),
         ));
   }
 }
