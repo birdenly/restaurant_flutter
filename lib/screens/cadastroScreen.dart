@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:restaurante_app/controller/userController.dart';
 import 'package:restaurante_app/model/user.dart';
 
 class CreateAccountPage extends StatelessWidget {
@@ -32,12 +33,13 @@ class CreateAccountPage extends StatelessWidget {
             ElevatedButton(
               onPressed: () {
                 User user = User(
+                  id: '',
                   email: emailController.text,
                   password: passwordController.text,
                   carrinho: [],
                 );
-                // await Provider.of<User>(context, listen: false).addUser(user);
-                listaUsuarios.add(user);
+                Provider.of<UserController>(context, listen: false)
+                    .addUser(user);
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                     content: Text('Usuário cadastrado com sucesso!'),

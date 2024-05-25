@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:restaurante_app/controller/comidaController.dart';
+import 'package:restaurante_app/controller/userController.dart';
 import 'package:restaurante_app/main.dart';
+import 'package:restaurante_app/model/bebidas.dart';
+import 'package:restaurante_app/model/pratos.dart';
+import 'package:restaurante_app/model/sobremesa.dart';
 import 'package:restaurante_app/model/user.dart';
 import 'package:restaurante_app/screens/cadastroScreen.dart';
 import 'package:restaurante_app/screens/forgotScreen.dart';
@@ -15,6 +20,25 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  late Future<List<User>> futureUsers;
+  late Future<List<Pratos>> futurePratos;
+  late Future<List<Sobremesa>> futureSobremesa;
+  late Future<List<Bebidas>> futureBebidas;
+
+  @override
+  void initState() {
+    super.initState();
+    futureUsers =
+        Provider.of<UserController>(context, listen: false).fetchUsers();
+    // futurePratos = Provider.of<ComidaController>(context, listen: false).fetchPratos();
+    // futureSobremesa = Provider.of<ComidaController>(context, listen: false).fetchSobremesas();
+    // futureBebidas = Provider.of<ComidaController>(context, listen: false).fetchBebida();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+  }
 
   void showSnackBar(String message) {
     ScaffoldMessenger.of(context).showSnackBar(

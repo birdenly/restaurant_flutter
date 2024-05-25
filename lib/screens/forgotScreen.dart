@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:restaurante_app/controller/userController.dart';
 import 'package:restaurante_app/main.dart';
 import 'package:restaurante_app/model/user.dart';
 import 'package:restaurante_app/screens/cadastroScreen.dart';
@@ -91,6 +92,9 @@ class _LoginPageState extends State<ForgotPage> {
                       Provider.of<User>(context, listen: false)
                           .userAtual
                           .password = passwordController.text;
+                      Provider.of<UserController>(context, listen: false)
+                          .updateUser(Provider.of<User>(context, listen: false)
+                              .userAtual);
                       showSnackBar('Senha alterada com sucesso!');
                       Navigator.pop(context);
                     },

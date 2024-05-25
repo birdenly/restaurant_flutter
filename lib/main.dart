@@ -1,5 +1,8 @@
+import 'dart:ffi';
 import 'dart:math';
 
+import 'package:restaurante_app/controller/comidaController.dart';
+import 'package:restaurante_app/controller/userController.dart';
 import 'package:restaurante_app/screens/bebidasScreen.dart';
 import 'package:restaurante_app/components/drawer.dart';
 import 'package:restaurante_app/screens/loginScreen.dart';
@@ -27,6 +30,7 @@ class restauranteApp extends StatelessWidget {
         providers: [
           ChangeNotifierProvider(
             create: (context) => Pratos(
+              id: '',
               nome: '',
               preco: 0.0,
               qtd: '',
@@ -37,6 +41,7 @@ class restauranteApp extends StatelessWidget {
           ),
           ChangeNotifierProvider(
             create: (context) => Sobremesa(
+                id: '',
                 nome: '',
                 preco: 0.0,
                 calorias: '',
@@ -46,18 +51,29 @@ class restauranteApp extends StatelessWidget {
           ),
           ChangeNotifierProvider(
             create: (context) => Bebidas(
-                nome: '', preco: 0.0, popular: false, imagem: '', temp: ''),
+                id: '',
+                nome: '',
+                preco: 0.0,
+                popular: false,
+                imagem: '',
+                temp: ''),
           ),
           ChangeNotifierProvider(
-            create: (context) => User(email: '', password: '', carrinho: []),
+            create: (context) =>
+                User(id: '', email: '', password: '', carrinho: []),
           ),
           ChangeNotifierProvider(
             create: (context) => Comidas(
+              id: '',
               nome: '',
               imagem: '',
               preco: 0.0,
             ),
           ),
+          ChangeNotifierProvider(
+            create: (context) => UserController(),
+          ),
+          ChangeNotifierProvider(create: (context) => ComidaController())
         ],
         child: MaterialApp(
           home: LoginPage(),
