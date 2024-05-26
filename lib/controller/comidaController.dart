@@ -9,10 +9,10 @@ import 'dart:convert';
 import 'package:restaurante_app/model/user.dart';
 
 class ComidaController extends ChangeNotifier {
-  final String url = 'https://projetou2-f2b05-default-rtdb.firebaseio.com/';
+  final String url = 'https://projetomobile-694f8-default-rtdb.firebaseio.com/';
 
   //// PRATOS
-
+  ///
   Future<List<Pratos>> fetchPratos() async {
     final request = http.get(Uri.parse('$url/comida/pratos.json'));
 

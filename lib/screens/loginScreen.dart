@@ -30,9 +30,12 @@ class _LoginPageState extends State<LoginPage> {
     super.initState();
     futureUsers =
         Provider.of<UserController>(context, listen: false).fetchUsers();
-    // futurePratos = Provider.of<ComidaController>(context, listen: false).fetchPratos();
-    // futureSobremesa = Provider.of<ComidaController>(context, listen: false).fetchSobremesas();
-    // futureBebidas = Provider.of<ComidaController>(context, listen: false).fetchBebida();
+    futurePratos =
+        Provider.of<ComidaController>(context, listen: false).fetchPratos();
+    futureSobremesa =
+        Provider.of<ComidaController>(context, listen: false).fetchSobremesas();
+    futureBebidas =
+        Provider.of<ComidaController>(context, listen: false).fetchBebida();
   }
 
   @override

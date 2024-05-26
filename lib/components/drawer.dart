@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurante_app/controller/userController.dart';
 import 'package:restaurante_app/model/user.dart';
+import 'package:restaurante_app/screens/foodManager.dart';
 import 'package:restaurante_app/screens/loginScreen.dart';
 
 class DrawerWidget extends StatelessWidget {
@@ -174,22 +175,25 @@ class DrawerWidget extends StatelessWidget {
             ),
             ListTile(
               leading: Icon(Icons.add_circle, color: Colors.redAccent),
-              title: const Text('Adicionar/Editar Produto',
+              title: const Text('Edição de comidas',
                   style: TextStyle(color: Colors.black87)),
               onTap: () {
-                Navigator.pop(context);
-                // funcaoAdicionarEditarProduto();
+                // Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => foodManager()),
+                );
               },
             ),
-            ListTile(
-              leading: Icon(Icons.delete, color: Colors.redAccent),
-              title: const Text('Remover Produto',
-                  style: TextStyle(color: Colors.black87)),
-              onTap: () {
-                Navigator.pop(context);
-                // funcaoRemoverProduto();
-              },
-            ),
+            // ListTile(
+            //   leading: Icon(Icons.delete, color: Colors.redAccent),
+            //   title: const Text('Remover Produto',
+            //       style: TextStyle(color: Colors.black87)),
+            //   onTap: () {
+            //     Navigator.pop(context);
+            //     // funcaoRemoverProduto();
+            //   },
+            // ),
           ],
           ListTile(
             leading: Icon(Icons.credit_card, color: Colors.redAccent),
