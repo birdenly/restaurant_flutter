@@ -196,7 +196,7 @@ class DrawerWidget extends StatelessWidget {
             // ),
           ],
           ListTile(
-            leading: Icon(Icons.credit_card, color: Colors.redAccent),
+            leading: Icon(Icons.logout, color: Colors.redAccent),
             title: Text(
                 'Log Out "${Provider.of<User>(context).userAtual.email}"',
                 style: TextStyle(color: Colors.black87)),

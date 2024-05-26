@@ -23,7 +23,8 @@ class _PagamentoScreenState extends State<PagamentoScreen> {
   @override
   Widget build(BuildContext context) {
     double totalValue = 0;
-    for (var compra in Provider.of<User>(context, listen: false).carrinho) {
+    for (var compra
+        in Provider.of<User>(context, listen: false).userAtual.carrinho) {
       totalValue += (compra.preco * compra.counter);
     }
     return Scaffold(
@@ -39,6 +40,7 @@ class _PagamentoScreenState extends State<PagamentoScreen> {
               child: ListView(
                 children: [
                   ...Provider.of<User>(context, listen: false)
+                      .userAtual
                       .carrinho
                       .map((item) => ListTile(
                             title: Text(item.nome),
