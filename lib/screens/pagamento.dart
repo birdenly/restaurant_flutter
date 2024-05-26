@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
+import 'package:restaurante_app/main.dart';
 import 'package:restaurante_app/model/comida.dart';
 import 'package:flutter/material.dart';
 import 'package:restaurante_app/model/user.dart';
@@ -152,9 +153,21 @@ class _PagamentoScreenState extends State<PagamentoScreen> {
                             onPressed: () {
                               Provider.of<User>(context, listen: false)
                                   .userAtual
+                                  .carrinho
+                                  .forEach((element) {
+                                Provider.of<Comidas>(context, listen: false)
+                                    .resetCounter(element);
+                              });
+                              Provider.of<User>(context, listen: false)
+                                  .userAtual
                                   .clearCarrinho();
                               Navigator.of(ctx)
                                   .popUntil((route) => route.isFirst);
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => MyHomePage()),
+                              );
                             },
                           ),
                         ],

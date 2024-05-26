@@ -153,6 +153,18 @@ class _ListaCarinhoScreenState extends State<ListaCarinhoScreen> {
                                                   child: const Text('Excluir'),
                                                   onPressed: () {
                                                     setState(() {
+                                                      Provider.of<Comidas>(
+                                                              context,
+                                                              listen: false)
+                                                          .resetCounter(Provider
+                                                                  .of<
+                                                                          User>(
+                                                                      context,
+                                                                      listen:
+                                                                          false)
+                                                              .userAtual
+                                                              .carrinho[index]);
+
                                                       Provider.of<User>(context,
                                                               listen: false)
                                                           .userAtual

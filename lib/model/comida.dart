@@ -16,4 +16,9 @@ class Comidas extends ChangeNotifier {
     required this.preco,
     this.counter = 1,
   });
+
+  resetCounter(Comidas comida) {
+    comida.counter = 1;
+    notifyListeners();
+  }
 }
