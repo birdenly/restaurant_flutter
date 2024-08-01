@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:restaurante_app/components/SetLocation.dart';
 import 'package:restaurante_app/controller/userController.dart';
 import 'package:restaurante_app/model/user.dart';
 import 'package:restaurante_app/screens/foodManager.dart';

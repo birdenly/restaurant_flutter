@@ -1,16 +1,11 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:restaurante_app/components/SetLocation.dart';
 import 'package:restaurante_app/main.dart';
 import 'package:restaurante_app/model/comida.dart';
-import 'package:flutter/material.dart';
 import 'package:restaurante_app/model/user.dart';
-import 'package:restaurante_app/model/comida.dart';
-import 'package:restaurante_app/model/sobremesa.dart';
 
 class PagamentoScreen extends StatefulWidget {
-//   final Function limpaCarrinho;
-//   PagamentoScreen({required this.limpaCarrinho});
-
   @override
   _PagamentoScreenState createState() => _PagamentoScreenState();
 }
@@ -18,8 +13,14 @@ class PagamentoScreen extends StatefulWidget {
 class _PagamentoScreenState extends State<PagamentoScreen> {
   final formKey = GlobalKey<FormState>();
   final nameController = TextEditingController();
-  final addressController = TextEditingController();
   String paymentMethod = 'PIX';
+  String _streetName = '';
+
+  void _updateStreetName(String streetName) {
+    setState(() {
+      _streetName = streetName;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +29,7 @@ class _PagamentoScreenState extends State<PagamentoScreen> {
         in Provider.of<User>(context, listen: false).userAtual.carrinho) {
       totalValue += (compra.preco * compra.counter);
     }
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Pagamento'),
@@ -39,17 +41,15 @@ class _PagamentoScreenState extends State<PagamentoScreen> {
             Container(
               height: 200,
               child: ListView(
-                children: [
-                  ...Provider.of<User>(context, listen: false)
-                      .userAtual
-                      .carrinho
-                      .map((item) => ListTile(
-                            title: Text(item.nome),
-                            trailing: Text(
-                                'R\$ ${item.preco.toStringAsFixed(2)} x ${item.counter}'),
-                          ))
-                      .toList(),
-                ],
+                children: Provider.of<User>(context, listen: false)
+                    .userAtual
+                    .carrinho
+                    .map((item) => ListTile(
+                          title: Text(item.nome),
+                          trailing: Text(
+                              'R\$ ${item.preco.toStringAsFixed(2)} x ${item.counter}'),
+                        ))
+                    .toList(),
               ),
             ),
             Container(
@@ -69,16 +69,6 @@ class _PagamentoScreenState extends State<PagamentoScreen> {
                 return null;
               },
             ),
-            TextFormField(
-              controller: addressController,
-              decoration: InputDecoration(labelText: 'Endereço'),
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Por favor, insira seu endereço';
-                }
-                return null;
-              },
-            ),
             DropdownButtonFormField<String>(
               value: paymentMethod,
               items: <String>['PIX', 'Crédito', 'Débito', 'Espécie']
@@ -94,6 +84,22 @@ class _PagamentoScreenState extends State<PagamentoScreen> {
                 });
               },
               decoration: InputDecoration(labelText: 'Forma de pagamento'),
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                final streetName = await Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        LocationInput(onSelectStreet: _updateStreetName),
+                  ),
+                );
+
+                if (streetName != null) {
+                  _updateStreetName(streetName);
+                }
+              },
+              child: Text('Localização'),
             ),
             ElevatedButton(
               onPressed: () {
@@ -121,26 +127,20 @@ class _PagamentoScreenState extends State<PagamentoScreen> {
                                 ),
                                 SizedBox(height: 20),
                                 Text(
-                                  'Endereço de entrega: ${addressController.text}',
-                                  style: TextStyle(
-                                    fontSize: 15,
-                                  ),
+                                  'Endereço de entrega: ${_streetName.isNotEmpty ? _streetName : 'Não informado'}',
+                                  style: TextStyle(fontSize: 15),
                                   textAlign: TextAlign.center,
                                 ),
                                 SizedBox(height: 10),
                                 Text(
                                   'Forma de pagamento: $paymentMethod',
-                                  style: TextStyle(
-                                    fontSize: 15,
-                                  ),
+                                  style: TextStyle(fontSize: 15),
                                   textAlign: TextAlign.center,
                                 ),
                                 SizedBox(height: 10),
                                 Text(
                                   'Obrigado pela preferência, ${nameController.text}!',
-                                  style: TextStyle(
-                                    fontSize: 15,
-                                  ),
+                                  style: TextStyle(fontSize: 15),
                                   textAlign: TextAlign.center,
                                 ),
                               ],

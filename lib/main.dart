@@ -1,6 +1,7 @@
 import 'dart:ffi';
 import 'dart:math';
 
+import 'package:restaurante_app/components/SetLocation.dart';
 import 'package:restaurante_app/controller/comidaController.dart';
 import 'package:restaurante_app/controller/userController.dart';
 import 'package:restaurante_app/screens/bebidasScreen.dart';
@@ -73,7 +74,7 @@ class restauranteApp extends StatelessWidget {
           ChangeNotifierProvider(
             create: (context) => UserController(),
           ),
-          ChangeNotifierProvider(create: (context) => ComidaController())
+          ChangeNotifierProvider(create: (context) => ComidaController()),
         ],
         child: MaterialApp(
           home: LoginPage(),

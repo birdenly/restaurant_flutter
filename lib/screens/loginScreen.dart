@@ -9,6 +9,7 @@ import 'package:restaurante_app/model/sobremesa.dart';
 import 'package:restaurante_app/model/user.dart';
 import 'package:restaurante_app/screens/cadastroScreen.dart';
 import 'package:restaurante_app/screens/forgotScreen.dart';
+import 'package:restaurante_app/components/SetLocation.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -26,17 +27,17 @@ class _LoginPageState extends State<LoginPage> {
   late Future<List<Bebidas>> futureBebidas;
 
   @override
-  void initState() {
-    super.initState();
-    futureUsers =
-        Provider.of<UserController>(context, listen: false).fetchUsers();
-    futurePratos =
-        Provider.of<ComidaController>(context, listen: false).fetchPratos();
-    futureSobremesa =
-        Provider.of<ComidaController>(context, listen: false).fetchSobremesas();
-    futureBebidas =
-        Provider.of<ComidaController>(context, listen: false).fetchBebida();
-  }
+  // void initState() {
+  //   super.initState();
+  //   futureUsers =
+  //       Provider.of<UserController>(context, listen: false).fetchUsers();
+  //   futurePratos =
+  //       Provider.of<ComidaController>(context, listen: false).fetchPratos();
+  //   futureSobremesa =
+  //       Provider.of<ComidaController>(context, listen: false).fetchSobremesas();
+  //   futureBebidas =
+  //       Provider.of<ComidaController>(context, listen: false).fetchBebida();
+  // }
 
   @override
   void didChangeDependencies() {
