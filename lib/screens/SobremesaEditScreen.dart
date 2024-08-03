@@ -1,9 +1,14 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:restaurante_app/components/image_input.dart';
 import 'package:restaurante_app/controller/comidaController.dart';
 import 'package:restaurante_app/model/pratos.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurante_app/model/sobremesa.dart';
+import 'package:image_picker/image_picker.dart';
 
 class SobremesaEditScreen extends StatefulWidget {
   final Sobremesa sobremesaAtual;
@@ -19,10 +24,34 @@ class SobremesaEditScreen extends StatefulWidget {
 
 class SobremesaEditScreenState extends State<SobremesaEditScreen> {
   final nameController = TextEditingController();
-  final imageController = TextEditingController();
   final precoController = TextEditingController();
   final caloriasController = TextEditingController();
   final ingredientesController = TextEditingController();
+
+  ImagePicker _Imagem = ImagePicker();
+  String _base64String = '';
+
+  File? _pickedImage;
+
+  void _selectImage(File? pickedImage) {
+    setState(() {
+      _pickedImage = pickedImage;
+    });
+  }
+
+  void _updateBase64(String base64) {
+    setState(() {
+      _base64String = base64;
+    });
+  }
+
+  Image imageFromBase64String() {
+    return Image.memory(base64Decode(_base64String));
+  }
+
+  Uint8List dataFromBase64String() {
+    return base64Decode(_base64String);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,15 +74,9 @@ class SobremesaEditScreenState extends State<SobremesaEditScreen> {
                 widget.sobremesaAtual.nome = value;
               },
             ),
-            TextField(
-              controller: imageController,
-              decoration: InputDecoration(
-                labelText: 'Imagem',
-                hintText: widget.sobremesaAtual.imagem,
-              ),
-              onChanged: (value) {
-                widget.sobremesaAtual.imagem = value;
-              },
+            Container(
+              child: ImageInput(
+                  _selectImage, _updateBase64, widget.sobremesaAtual),
             ),
             TextField(
               controller: precoController,
@@ -109,7 +132,7 @@ class SobremesaEditScreenState extends State<SobremesaEditScreen> {
                   var newSobremesa = Sobremesa(
                       id: '',
                       nome: nameController.text,
-                      imagem: imageController.text,
+                      imagem: _base64String,
                       preco: double.parse(precoController.text),
                       popular: widget.sobremesaAtual.popular,
                       ingredientes: ingredientesController.text,

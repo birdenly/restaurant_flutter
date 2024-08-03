@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:provider/provider.dart';
 import 'package:restaurante_app/model/bebidas.dart';
 import 'package:restaurante_app/model/comida.dart';
@@ -7,6 +9,20 @@ import 'package:restaurante_app/model/user.dart';
 import '../model/pratos.dart';
 
 class bebidasScreen extends StatelessWidget {
+  Widget buildImage(String imageData) {
+    if (imageData.startsWith('http') || imageData.startsWith('https')) {
+      return Image.network(
+        imageData,
+        fit: BoxFit.cover,
+      );
+    } else {
+      return Image.memory(
+        base64Decode(imageData),
+        fit: BoxFit.cover,
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,13 +44,9 @@ class bebidasScreen extends StatelessWidget {
                     child: Card(
                       child: ListTile(
                         leading: Container(
-                          width: 80.0,
-                          height: 80.0,
-                          child: Image.network(
-                            listaDeBebidas[index].imagem,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
+                            width: 80.0,
+                            height: 80.0,
+                            child: buildImage(listaDeBebidas[index].imagem)),
                         title: Row(
                           children: [
                             if (listaDeBebidas[index].popular) Icon(Icons.star),
@@ -113,13 +125,10 @@ class bebidasScreen extends StatelessWidget {
                                   child: Column(
                                     children: <Widget>[
                                       Container(
-                                        width: 200.0,
-                                        height: 200.0,
-                                        child: Image.network(
-                                          listaDeBebidas[index].imagem,
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ),
+                                          width: 200.0,
+                                          height: 200.0,
+                                          child: buildImage(
+                                              listaDeBebidas[index].imagem)),
                                       SizedBox(height: 10.0),
                                       Align(
                                         alignment: Alignment.centerLeft,

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:provider/provider.dart';
 import 'package:restaurante_app/model/comida.dart';
 import 'package:restaurante_app/model/sobremesa.dart';
@@ -6,6 +8,20 @@ import 'package:restaurante_app/model/user.dart';
 import '../model/pratos.dart';
 
 class sobremesaScreen extends StatelessWidget {
+  Widget buildImage(String imageData) {
+    if (imageData.startsWith('http') || imageData.startsWith('https')) {
+      return Image.network(
+        imageData,
+        fit: BoxFit.cover,
+      );
+    } else {
+      return Image.memory(
+        base64Decode(imageData),
+        fit: BoxFit.cover,
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,13 +43,9 @@ class sobremesaScreen extends StatelessWidget {
                     child: Card(
                       child: ListTile(
                         leading: Container(
-                          width: 80.0,
-                          height: 80.0,
-                          child: Image.network(
-                            listaDeSobremesas[index].imagem,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
+                            width: 80.0,
+                            height: 80.0,
+                            child: buildImage(listaDeSobremesas[index].imagem)),
                         title: Row(
                           children: [
                             if (listaDeSobremesas[index].popular)
@@ -115,10 +127,8 @@ class sobremesaScreen extends StatelessWidget {
                                       Container(
                                         width: 200.0,
                                         height: 200.0,
-                                        child: Image.network(
-                                          listaDeSobremesas[index].imagem,
-                                          fit: BoxFit.cover,
-                                        ),
+                                        child: buildImage(
+                                            listaDeSobremesas[index].imagem),
                                       ),
                                       SizedBox(height: 10),
                                       Align(

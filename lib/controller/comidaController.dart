@@ -132,6 +132,7 @@ class ComidaController extends ChangeNotifier {
       Map<String, dynamic> bebidas = json.decode(response.body);
       bebidas.forEach((id, user) {
         bool bebidaExists = listaDeBebidas.any((u) => u.id == id);
+
         if (!bebidaExists) {
           listaDeBebidas.add(Bebidas.fromJson(user));
         }

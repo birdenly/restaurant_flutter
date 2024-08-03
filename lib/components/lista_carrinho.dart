@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
@@ -19,11 +21,19 @@ class _ListaCarinhoScreenState extends State<ListaCarinhoScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // limpaCarrinho() {
-    //   setState(() {
-    //     Provider.of<User>(context, listen: false).carrinho.clear();
-    //   });
-    // }
+    Widget buildImage(String imageData) {
+      if (imageData.startsWith('http') || imageData.startsWith('https')) {
+        return Image.network(
+          imageData,
+          fit: BoxFit.cover,
+        );
+      } else {
+        return Image.memory(
+          base64Decode(imageData),
+          fit: BoxFit.cover,
+        );
+      }
+    }
 
     double totalValue = 0;
     for (var compra
@@ -55,16 +65,13 @@ class _ListaCarinhoScreenState extends State<ListaCarinhoScreen> {
                           Card(
                             child: ListTile(
                               leading: Container(
-                                width: 80.0,
-                                height: 80.0,
-                                child: Image.network(
-                                  Provider.of<User>(context, listen: false)
-                                      .userAtual
-                                      .carrinho[index]
-                                      .imagem,
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
+                                  width: 80.0,
+                                  height: 80.0,
+                                  child: buildImage(
+                                      Provider.of<User>(context, listen: false)
+                                          .userAtual
+                                          .carrinho[index]
+                                          .imagem)),
                               title: Text(
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
