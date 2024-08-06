@@ -22,7 +22,27 @@ class PratosEditScreen extends StatefulWidget {
 }
 
 class PratosEditScreenState extends State<PratosEditScreen> {
+  Widget buildImage(String imageData) {
+    if (imageData.startsWith('http') || imageData.startsWith('https')) {
+      return TextField(
+        controller: imageController,
+        decoration: InputDecoration(
+          labelText: 'Imagem',
+          hintText: widget.pratoAtual.imagem,
+        ),
+        onChanged: (value) {
+          widget.pratoAtual.imagem = value;
+        },
+      );
+    } else {
+      return Container(
+        child: ImageInput(_selectImage, _updateBase64, widget.pratoAtual),
+      );
+    }
+  }
+
   final nameController = TextEditingController();
+  final imageController = TextEditingController();
   final precoController = TextEditingController();
   final qtdController = TextEditingController();
   final ingredientesController = TextEditingController();
@@ -75,9 +95,7 @@ class PratosEditScreenState extends State<PratosEditScreen> {
                 widget.pratoAtual.nome = value;
               },
             ),
-            Container(
-              child: ImageInput(_selectImage, _updateBase64, widget.pratoAtual),
-            ),
+            buildImage(widget.pratoAtual.imagem),
             TextField(
               controller: precoController,
               keyboardType: TextInputType.number,

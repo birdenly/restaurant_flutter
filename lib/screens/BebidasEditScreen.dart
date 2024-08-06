@@ -23,7 +23,27 @@ class BebidasEditScreen extends StatefulWidget {
 }
 
 class BebidasEditScreenState extends State<BebidasEditScreen> {
+  Widget buildImage(String imageData) {
+    if (imageData.startsWith('http') || imageData.startsWith('https')) {
+      return TextField(
+        controller: imageController,
+        decoration: InputDecoration(
+          labelText: 'Imagem',
+          hintText: widget.bebidaAtual.imagem,
+        ),
+        onChanged: (value) {
+          widget.bebidaAtual.imagem = value;
+        },
+      );
+    } else {
+      return Container(
+        child: ImageInput(_selectImage, _updateBase64, widget.bebidaAtual),
+      );
+    }
+  }
+
   final nameController = TextEditingController();
+  final imageController = TextEditingController();
   final precoController = TextEditingController();
   final tempController = TextEditingController();
   final ingredientesController = TextEditingController();
@@ -74,10 +94,7 @@ class BebidasEditScreenState extends State<BebidasEditScreen> {
                 widget.bebidaAtual.nome = value;
               },
             ),
-            Container(
-              child:
-                  ImageInput(_selectImage, _updateBase64, widget.bebidaAtual),
-            ),
+            buildImage(widget.bebidaAtual.imagem),
             TextField(
               controller: precoController,
               keyboardType: TextInputType.number,

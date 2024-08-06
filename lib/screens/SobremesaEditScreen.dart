@@ -23,7 +23,27 @@ class SobremesaEditScreen extends StatefulWidget {
 }
 
 class SobremesaEditScreenState extends State<SobremesaEditScreen> {
+  Widget buildImage(String imageData) {
+    if (imageData.startsWith('http') || imageData.startsWith('https')) {
+      return TextField(
+        controller: imageController,
+        decoration: InputDecoration(
+          labelText: 'Imagem',
+          hintText: widget.sobremesaAtual.imagem,
+        ),
+        onChanged: (value) {
+          widget.sobremesaAtual.imagem = value;
+        },
+      );
+    } else {
+      return Container(
+        child: ImageInput(_selectImage, _updateBase64, widget.sobremesaAtual),
+      );
+    }
+  }
+
   final nameController = TextEditingController();
+  final imageController = TextEditingController();
   final precoController = TextEditingController();
   final caloriasController = TextEditingController();
   final ingredientesController = TextEditingController();
@@ -74,10 +94,7 @@ class SobremesaEditScreenState extends State<SobremesaEditScreen> {
                 widget.sobremesaAtual.nome = value;
               },
             ),
-            Container(
-              child: ImageInput(
-                  _selectImage, _updateBase64, widget.sobremesaAtual),
-            ),
+            buildImage(widget.sobremesaAtual.imagem),
             TextField(
               controller: precoController,
               keyboardType: TextInputType.number,
